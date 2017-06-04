@@ -9,12 +9,18 @@
 
 ## INTRODUCTION
 
-This module provides a modal form for editing commerce products. After you have
-installed the module, you will get a new field in each of your product types. Go 
-to the Manage display 'admin/commerce/config/product-types/default/edit/display' 
-and look for the 'Quick product edit' field. Choose where you want this field to 
-show up and that is it. Only users with 'Use the commerce administration pages' 
-permission will have access to the quick edit form.
+This module provides a modal form for editing commerce products. You can use it 
+to quickly edit you products without having to go to the edit form and waste 
+your valuable time. Just click on the quick edit link and make the necessary 
+changes.
+
+After you have installed the module, you will get a new field in each of your 
+product types. This field will be outputted as a link on your product page, or 
+in the product teaser. Go to the Manage display page 
+'admin/commerce/config/product-types/default/edit/display' and look for the 
+'Quick product edit' field. Choose where you want this field to show up and that 
+is it. Only users with the 'Use the commerce administration pages' permission 
+will have access to the quick edit form.
 
 ## REQUIREMENTS
 
