@@ -2,12 +2,13 @@
 
 namespace Drupal\commerce_quick_edit\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\EntityFormBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityFormBuilder;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * ProductQuickEditController class.
@@ -25,14 +26,20 @@ class ProductQuickEditController extends ControllerBase {
   protected $entityFormBuilder;
 
   /**
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * QuickNoteController constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    * @param \Drupal\Core\Entity\EntityFormBuilder $entity_form_builder
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFormBuilder $entity_form_builder) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFormBuilder $entity_form_builder, ConfigFactoryInterface $config_factory) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFormBuilder = $entity_form_builder;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -43,7 +50,8 @@ class ProductQuickEditController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('entity_type.manager'),
-      $container->get('entity.form_builder')
+      $container->get('entity.form_builder'),
+      $container->get('config.factory')
     );
   }
 
@@ -59,6 +67,9 @@ class ProductQuickEditController extends ControllerBase {
       ->getStorage('commerce_product')
       ->load($id);
 
+    $config = $this->configFactory
+      ->get('commerce_quick_edit.settings');
+
     $quick_note_form = $this->entityFormBuilder->getForm($product_entity);
     $quick_note_form['#attributes']['class'][] = 'commerce-quick-edit';
     $response = new AjaxResponse();
@@ -67,7 +78,7 @@ class ProductQuickEditController extends ControllerBase {
       new OpenModalDialogCommand(
         'Product edit',
         $quick_note_form,
-        ['width' => '95%']
+        ['width' => $config->get('modal_width')]
       )
     );
   }

@@ -5,3 +5,11 @@ commerce_quick_edit.product_edit:
     _title: 'Product Quick Edit'
   requirements:
     _permission: 'access commerce administration pages'
+
+commerce_quick_edit.settings_form:
+  path: '/admin/commerce/config/commerce-quick-edit'
+  defaults:
+    _title: 'Commerce Quick Edit'
+    _form: '\Drupal\commerce_quick_edit\Form\SettingsForm'
+  requirements:
+    _permission: 'access commerce administration pages'

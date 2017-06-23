@@ -3,5 +3,6 @@ type: module
 description: 'Provides a modal form for quick product editing.'
 core: 8.x
 package: Commerce
+configure: commerce_quick_edit.settings_form
 dependencies:
   - drupal:commerce
