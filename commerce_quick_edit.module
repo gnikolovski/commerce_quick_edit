@@ -21,7 +21,7 @@ function commerce_quick_edit_entity_extra_field_info() {
     $extra_field['commerce_product'][$bundle->Id()]['display']['quick_product_edit'] = [
       'label' => t('Quick product edit'),
       'description' => t('Quick product edit.'),
-      'weight' => 100,
+      'weight' => -100,
       'visible' => TRUE,
     ];
   }
