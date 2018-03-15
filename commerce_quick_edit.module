@@ -58,7 +58,8 @@ function commerce_quick_edit_entity_view(array &$build, EntityInterface $entity,
  * Implements hook_form_alter().
  */
 function commerce_quick_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_state->getBuildInfo()['base_form_id'] !== 'commerce_product_form') {
+  $info = $form_state->getBuildInfo();
+  if (!isset($info['base_form_id']) || ($info['base_form_id'] !== 'commerce_product_form')) {
     return;
   }
 
