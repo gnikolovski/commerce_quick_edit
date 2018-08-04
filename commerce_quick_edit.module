@@ -42,7 +42,7 @@ function commerce_quick_edit_entity_view(array &$build, EntityInterface $entity,
       '#type' => 'link',
       '#title' => t('Quick edit'),
       '#url' => Url::fromRoute('commerce_quick_edit.product_edit', [
-        'id' => $entity->id()
+        'id' => $entity->id(),
       ]),
       '#attributes' => [
         'class' => [

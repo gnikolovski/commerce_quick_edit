@@ -6,7 +6,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityFormBuilder;
+use Drupal\Core\Entity\EntityFormBuilderInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -16,16 +16,22 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ProductQuickEditController extends ControllerBase {
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
-   * @var \Drupal\Core\Entity\EntityFormBuilder
+   * The entity form builder.
+   *
+   * @var \Drupal\Core\Entity\EntityFormBuilderInterface
    */
   protected $entityFormBuilder;
 
   /**
+   * The config factory.
+   *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
@@ -34,9 +40,9 @@ class ProductQuickEditController extends ControllerBase {
    * QuickNoteController constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   * @param \Drupal\Core\Entity\EntityFormBuilder $entity_form_builder
+   * @param \Drupal\Core\Entity\EntityFormBuilderInterface $entity_form_builder
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFormBuilder $entity_form_builder, ConfigFactoryInterface $config_factory) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFormBuilderInterface $entity_form_builder, ConfigFactoryInterface $config_factory) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFormBuilder = $entity_form_builder;
     $this->configFactory = $config_factory;
@@ -58,9 +64,11 @@ class ProductQuickEditController extends ControllerBase {
   /**
    * Open product edit form in a modal.
    *
-   * @param integer $id
+   * @param int $id
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function openModalForm($id) {
     $product_entity = $this->entityTypeManager
