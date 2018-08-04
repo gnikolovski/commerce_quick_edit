@@ -16,21 +16,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ProductQuickEditController extends ControllerBase {
 
   /**
-   * The entity type manager.
+   * Entity type manager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
-   * The entity form builder.
+   * Entity form builder.
    *
    * @var \Drupal\Core\Entity\EntityFormBuilderInterface
    */
   protected $entityFormBuilder;
 
   /**
-   * The config factory.
+   * Config factory.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
@@ -40,11 +40,11 @@ class ProductQuickEditController extends ControllerBase {
    * ProductQuickEditController constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
+   *   Entity type manager.
    * @param \Drupal\Core\Entity\EntityFormBuilderInterface $entity_form_builder
-   *   The entity form builder.
+   *   Entity form builder.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The config factory.
+   *   Config factory.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFormBuilderInterface $entity_form_builder, ConfigFactoryInterface $config_factory) {
     $this->entityTypeManager = $entity_type_manager;
@@ -67,8 +67,10 @@ class ProductQuickEditController extends ControllerBase {
    * Open product edit form in a modal.
    *
    * @param int $id
+   *   Product ID.
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
+   *   JSON response object.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
