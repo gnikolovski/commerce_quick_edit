@@ -1,0 +1,7 @@
+commerce_quick_edit.settings:
+  type: config_object
+  label: 'Commerce Quick Edit'
+  mapping:
+    modal_width:
+      type: string
+      label: 'Modal width'
